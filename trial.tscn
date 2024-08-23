@@ -1,3 +1,42 @@
-[gd_scene format=3 uid="uid://dfpoklvvuwya5"]
+[gd_scene load_steps=6 format=3 uid="uid://dfpoklvvuwya5"]
+
+[ext_resource type="PackedScene" uid="uid://dqnisla76dvbs" path="res://player.tscn" id="1_1od7j"]
+[ext_resource type="Script" path="res://trial.gd" id="1_7cbyj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a8yr1"]
+sky_top_color = Color(0.868846, 0.959342, 1, 1)
+sky_horizon_color = Color(0.386122, 0.405031, 0.335363, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.409289, 0.437731, 0.430893, 1)
+
+[sub_resource type="Sky" id="Sky_i02l7"]
+sky_material = SubResource("ProceduralSkyMaterial_a8yr1")
+
+[sub_resource type="Environment" id="Environment_q505x"]
+background_mode = 2
+sky = SubResource("Sky_i02l7")
 
 [node name="trial" type="Node3D"]
+script = ExtResource("1_7cbyj")
+
+[node name="player" parent="." instance=ExtResource("1_1od7j")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09767, -1.40117)
+light_color = Color(1, 1, 0.392157, 1)
+light_energy = 5.108
+light_size = 0.09
+omni_range = 4096.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q505x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.184003, 0.982926, 0, -0.982926, 0.184003, 0, 4.30844, 0)
+light_color = Color(0.584314, 1, 1, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 16.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
