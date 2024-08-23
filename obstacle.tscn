@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b786x3j0tif1w"]
+[gd_scene load_steps=5 format=3 uid="uid://b786x3j0tif1w"]
+
+[ext_resource type="Script" path="res://obstacle.gd" id="1_k57yx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydoxq"]
 albedo_color = Color(1, 1, 0, 1)
@@ -10,13 +12,12 @@ emission_energy_multiplier = 16.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4n815"]
 
-[node name="obstacle" type="Node3D"]
+[node name="obstacle" type="CharacterBody3D" groups=["obstacle"]]
+script = ExtResource("1_k57yx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_ydoxq")
 mesh = SubResource("BoxMesh_th2i4")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_4n815")

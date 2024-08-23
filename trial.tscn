@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfpoklvvuwya5"]
+[gd_scene load_steps=10 format=3 uid="uid://dfpoklvvuwya5"]
 
 [ext_resource type="PackedScene" uid="uid://dqnisla76dvbs" path="res://player.tscn" id="1_1od7j"]
 [ext_resource type="Script" path="res://trial.gd" id="1_7cbyj"]
+[ext_resource type="Script" path="res://despawner.gd" id="3_5t8f5"]
+[ext_resource type="Script" path="res://spawner.gd" id="4_ncpis"]
+[ext_resource type="PackedScene" uid="uid://b786x3j0tif1w" path="res://obstacle.tscn" id="5_h43bx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a8yr1"]
 sky_top_color = Color(0.868846, 0.959342, 1, 1)
@@ -16,6 +19,9 @@ sky_material = SubResource("ProceduralSkyMaterial_a8yr1")
 background_mode = 2
 sky = SubResource("Sky_i02l7")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3l8jk"]
+size = Vector3(162, 5.49695, 72.7495)
+
 [node name="trial" type="Node3D"]
 script = ExtResource("1_7cbyj")
 
@@ -28,6 +34,9 @@ light_energy = 5.108
 light_size = 0.09
 omni_range = 4096.0
 
+[node name="spawnPos" type="Marker3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.2776, 0)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q505x")
 
@@ -37,6 +46,22 @@ light_color = Color(0.584314, 1, 1, 1)
 light_energy = 16.0
 light_volumetric_fog_energy = 16.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="despawner" type="Area3D" parent="."]
+script = ExtResource("3_5t8f5")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="despawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.27393, 5.06704, -3.32309)
+shape = SubResource("BoxShape3D_3l8jk")
+
+[node name="spawner" type="Node3D" parent="."]
+script = ExtResource("4_ncpis")
+
+[node name="spawn_delay" type="Timer" parent="spawner"]
+wait_time = 0.2
+autostart = true
+
+[node name="obstacle" parent="." instance=ExtResource("5_h43bx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.9201, 0)
+
+[connection signal="body_entered" from="despawner" to="despawner" method="_on_body_entered"]
+[connection signal="timeout" from="spawner/spawn_delay" to="spawner" method="_on_spawn_delay_timeout"]

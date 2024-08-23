@@ -34,10 +34,10 @@ top_level = true
 script = ExtResource("1_le1tx")
 
 [node name="playerScene" parent="PlayerBody" instance=ExtResource("1_k270u")]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+transform = Transform3D(8, 0, 0, 0, -2.60864, -7.56274, 0, 7.56274, -2.60864, 0, 0.966178, -0.688774)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 0, 1.45719, 0)
+transform = Transform3D(1, 0, 0, 0, 0.997526, -0.0702962, 0, 0.0702962, 0.997526, 0, 0.491016, 0.688774)
 shape = SubResource("CapsuleShape3D_jcgxc")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="PlayerBody"]
