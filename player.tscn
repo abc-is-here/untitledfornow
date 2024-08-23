@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqnisla76dvbs"]
+
+[ext_resource type="PackedScene" uid="uid://bbtiwo4vbjelo" path="res://player_scene.tscn" id="1_k270u"]
+[ext_resource type="Script" path="res://player_body.gd" id="1_le1tx"]
+[ext_resource type="Script" path="res://cam_origin.gd" id="3_nuffy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jcgxc"]
+
+[node name="player" type="Node3D"]
+
+[node name="PlayerBody" type="CharacterBody3D" parent="."]
+script = ExtResource("1_le1tx")
+
+[node name="playerScene" parent="PlayerBody" instance=ExtResource("1_k270u")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.871504, 0)
+shape = SubResource("CapsuleShape3D_jcgxc")
+
+[node name="CamOrigin" type="Node3D" parent="."]
+script = ExtResource("3_nuffy")
+
+[node name="h" type="Node3D" parent="CamOrigin"]
+
+[node name="v" type="Node3D" parent="CamOrigin/h"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CamOrigin/h/v"]
+spring_length = 4.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CamOrigin/h/v/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+current = true
+fov = 80.0
