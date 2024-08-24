@@ -25,6 +25,9 @@ size = Vector3(162, 5.49695, 72.7495)
 [node name="trial" type="Node3D"]
 script = ExtResource("1_7cbyj")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q505x")
+
 [node name="player" parent="." instance=ExtResource("1_1od7j")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="player"]
@@ -36,9 +39,6 @@ omni_range = 4096.0
 
 [node name="spawnPos" type="Marker3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.2776, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_q505x")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.184003, 0.982926, 0, -0.982926, 0.184003, 0, 4.30844, 0)

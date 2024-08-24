@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqnisla76dvbs"]
+[gd_scene load_steps=5 format=3 uid="uid://dqnisla76dvbs"]
 
 [ext_resource type="PackedScene" uid="uid://bbtiwo4vbjelo" path="res://player_scene.tscn" id="1_k270u"]
 [ext_resource type="Script" path="res://player_body.gd" id="1_le1tx"]
@@ -6,26 +6,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jcgxc"]
 height = 2.99889
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1776"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.337255)
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 16.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o3g6f"]
-emission_shape = 1
-emission_sphere_radius = 49.55
-spread = 85.645
-gravity = Vector3(0, 20, 0)
-scale_min = 0.2
-scale_max = 0.5
-color = Color(0.843137, 0.807843, 0.196078, 1)
-hue_variation_min = 0.09
-hue_variation_max = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_l85cm"]
 
 [node name="player" type="Node3D"]
 
@@ -39,15 +19,6 @@ transform = Transform3D(8, 0, 0, 0, -2.60864, -7.56274, 0, 7.56274, -2.60864, 0,
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 0.997526, -0.0702962, 0, 0.0702962, 0.997526, 0, 0.491016, 0.688774)
 shape = SubResource("CapsuleShape3D_jcgxc")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50064, 0)
-material_override = SubResource("StandardMaterial3D_c1776")
-cast_shadow = 0
-amount = 15
-collision_base_size = 0.1
-process_material = SubResource("ParticleProcessMaterial_o3g6f")
-draw_pass_1 = SubResource("SphereMesh_l85cm")
 
 [node name="CamOrigin" type="Node3D" parent="."]
 script = ExtResource("3_nuffy")

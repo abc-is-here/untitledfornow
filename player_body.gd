@@ -14,16 +14,13 @@ var target_x = 0.0
 func _ready():
 	capture_mouse()
 	target_x = position.x
+	$playerScene/player/AnimationPlayer.play("Armature|mixamo_com|Layer0")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-		$playerScene/player/AnimationPlayer.play("Armature|mixamo_com|Layer0")
-
 	if Input.is_action_pressed("left"):
 		target_x -= lane_distance * delta * lane_change_speed
 	elif Input.is_action_pressed("right"):
